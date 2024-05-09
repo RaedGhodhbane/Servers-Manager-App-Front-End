@@ -34,12 +34,12 @@ export class AppComponent implements OnInit {
         map(response => {
           this.notifier.onDefault(response.message);
           this.dataSubject.next(response);
-          return { dataState: DataState.LOADED_State, appData: {...response, data : { servers : response.data.servers?.reverse()}} }
+          return { dataState: DataState.LOADED_STATE, appData: {...response, data : { servers : response.data.servers?.reverse()}} }
         }),
-        startWith({ dataState: DataState.LOADING_State }),
+        startWith({ dataState: DataState.LOADING_STATE }),
         catchError((error: string) => {
           this.notifier.onError(error);
-          return of({ dataState: DataState.ERROR_State, error })
+          return of({ dataState: DataState.ERROR_STATE, error })
         })
       );
   }
@@ -56,13 +56,13 @@ export class AppComponent implements OnInit {
           }
           this.notifier.onDefault(response.message);
           this.filterSubject.next('');
-          return { dataState: DataState.LOADED_State, appData: this.dataSubject.value as CustomResponse }
+          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value as CustomResponse }
         }),
-        startWith({ dataState: DataState.LOADED_State, appData: this.dataSubject.value as CustomResponse }),
+        startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value as CustomResponse }),
         catchError((error: string) => {
           this.filterSubject.next('');
           this.notifier.onError(error);
-          return of({ dataState: DataState.ERROR_State, error });
+          return of({ dataState: DataState.ERROR_STATE, error });
         })
       );
   }
@@ -84,13 +84,13 @@ export class AppComponent implements OnInit {
           document.getElementById('closeModal')?.click();
           this.isLoading.next(false);
           serverForm.resetForm({ status: this.Status.SERVER_DOWN });
-          return { dataState: DataState.LOADED_State, appData: this.dataSubject.value as CustomResponse }
+          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value as CustomResponse }
         }),
-        startWith({ dataState: DataState.LOADED_State, appData: this.dataSubject.value as CustomResponse }),
+        startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value as CustomResponse }),
         catchError((error: string) => {
           this.isLoading.next(false);
           this.notifier.onError(error);
-          return of({ dataState: DataState.ERROR_State, error });
+          return of({ dataState: DataState.ERROR_STATE, error });
         })
       );
   }
@@ -100,12 +100,12 @@ export class AppComponent implements OnInit {
       .pipe(
         map(response => {
           this.notifier.onDefault(response.message);
-          return { dataState: DataState.LOADED_State, appData: response }
+          return { dataState: DataState.LOADED_STATE, appData: response }
         }),
-        startWith({ dataState: DataState.LOADED_State, appData: this.dataSubject.value as CustomResponse }),
+        startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value as CustomResponse }),
         catchError((error: string) => {
           this.notifier.onError(error);
-          return of({ dataState: DataState.ERROR_State, error });
+          return of({ dataState: DataState.ERROR_STATE, error });
         })
       );
   }
@@ -119,12 +119,12 @@ export class AppComponent implements OnInit {
               {servers: this.dataSubject.value?.data.servers?.filter(s => s.id !== server.id)}}
           );
           this.notifier.onDefault(response.message);
-          return { dataState: DataState.LOADED_State, appData: this.dataSubject.value as CustomResponse }
+          return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value as CustomResponse }
         }),
-        startWith({ dataState: DataState.LOADED_State, appData: this.dataSubject.value as CustomResponse }),
+        startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value as CustomResponse }),
         catchError((error: string) => {
           this.notifier.onError(error);
-          return of({ dataState: DataState.ERROR_State, error });
+          return of({ dataState: DataState.ERROR_STATE, error });
         })
       );
   }
